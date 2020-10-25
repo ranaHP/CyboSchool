@@ -19,29 +19,23 @@
   <!-- for module css -->
   <link rel="stylesheet" href="./questions/module1.css">
   <!-- for facejs  -->
-  <script defer src="./libs/face-api.min.js"></script>
+  <!-- <script defer src="./libs/face-api.min.js"></script> -->
   <!-- face recognitioin script -->
- <script defer src="./facerecognition/script.js"></script>
-  <!-- styls -->
-
-
+ <!-- <script defer src="./facerecognition/script.js"></script> -->
   <!-- insert my css -->
   <link rel="stylesheet" href="./style.css">
-  <style>
-    body{
-      
-      overflow: hidden;
-    }
-    
-    canvas {
-      position: absolute;
-    }
+
+
+  <!-- for Text To Spech  -->
+  <script src="https://code.responsivevoice.org/responsivevoice.js?key=DV3DznWY"></script>
   
-  </style>
+  <script src="./voice.js"></script>
+
+
 </head>
 
 
-<body onload="initialitation()"   >
+<body onload="initialitation()">
 
 
   <div  style="background-color: #7efff5;width: 200px;height: 100px;position: absolute;top: 30px;right: 0px;"> 
@@ -76,7 +70,7 @@
        
         <!-- question html start -->
         <div style="width:40vw;" onmouseleave="mouseGoOut();" onmouseenter="mouseGoOut();" >
-          <div style="border: 2px solid #7efff5;padding-left: 100px;margin-right: -200px;margin-top: 100px;padding-bottom: 80px;" class="neon-wrapper">
+          <div style="border: 2px solid #7efff5;padding-left: 100px;margin-right: -200px;margin-top: 100px;padding-bottom: 80px;  background: rgba(0,0,0,0.5);" class="neon-wrapper">
             <div class="row " style="margin-top: 50px;">
               <div class="row">
                 <div class="col-sm-12 col-md-11 col-lg-11 col-xl-11 " >
@@ -97,19 +91,20 @@
                     <input type="text" class="form-control" id="userInput">
                   </div>
                   <div class="form-group">
-                    <button class="btn btn-primary" value ="submit" id="submit" onclick="checkAnswerModel1();test();">Submite Answer</button>
+                    <button class="btn btn-outline-danger" value ="submit" id="submit" onclick="checkAnswerModel1();">Submite Answer</button>
                   </div>
                   
                 </div>
       
             </div> 
-            <div class="row" style="width: 500px;">
+            <br>
+            <div class="row" style="width: 500px;padding-top: 90px;">
               <div class="col-sm-12 col-md-11 col-lg-11 col-xl-11">
                 <div class="form-group">
                   <label for="usr" id="answer" ></label>
                 </div>
                 <div class="form-group">
-                  <button class="btn btn-primary" value ="submit" id="nextQuectionButton" onclick="nextQuection()" style="display: none;">Next Answer</button>
+                  <button class="btn btn-outline-primary" value ="submit" id="nextQuectionButton" onclick="nextQuection()" style="display: none;">Next Answer</button>
                 </div>             
               </div>
             </div>  
@@ -166,24 +161,26 @@
             randomNumberGet();
             game = new Game(); 
             game.onLoad();
-            window.game = game;
-            
+            window.game = game;  
+            tts("Hwllo ");
           }
-          // function   mouseGoOut(){          
-          //   if(mouseStatus && faceStatus){
-            
-          //     game.playAnimation.call(game, 0);
+          
+
+          function   mouseGoOut(){          
+            if(mouseStatus && faceStatus){
+              //tts("Hey Kid What are you doing? you have to do this.. ")
+              game.playAnimation.call(game, 0);
              
             
-          //   }else{
-              
+            }else{
+              //tts("You are Good Boy.Let's to this ");
            
-          //     game.playAnimation.call(game, 1);
-          //   }
-          //   mouseStatus = !mouseStatus;
+              game.playAnimation.call(game, 1);
+            }
+            mouseStatus = !mouseStatus;
             
             
-          //  }
+           }
           //  setInterval(function(){ 
           //   faceExpresion = getExpresion();
             

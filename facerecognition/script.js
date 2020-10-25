@@ -26,9 +26,9 @@ video.addEventListener('play', () => {
     const resizedDetections = faceapi.resizeResults(detections, displaySize)
 
     canvas.getContext('2d').clearRect(0, 0, 500, 500)
-    // faceapi.draw.drawDetections(canvas, resizedDetections)
-    // faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
-    // faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
+    faceapi.draw.drawDetections(canvas, resizedDetections)
+    faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
+    faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
     if(detections[0] != null){
      //console.log(interpolatedExpressionsPredictions(detections[0]["expressions"]));
       // console.log(" angry - " + detections[0]["expressions"]["angry"].toFixed(2) );
@@ -51,7 +51,7 @@ video.addEventListener('play', () => {
         // console.log(detections[0]);
        }
     
-  }, 500)
+  }, 100)
 })
 
 

@@ -1,5 +1,5 @@
 var mainDivHeight = 55;
-	var mainDivWidth = 450;
+	var mainDivWidth = 490;
 	var columnNo = 10;
 	var rowNo = 1;
 	var noOf10Set ;
@@ -23,7 +23,7 @@ var mainDivHeight = 55;
 		var iconRandomNumber = getRandomNumber(0,15);
 		var iconIndex = iconClassArry[iconRandomNumber];
 		var iconName = iconNameAyyy[iconRandomNumber];
-		var NQuectionTxt1 = QuectionTxt.replace("name", iconName);
+		var NQuectionTxt1 = QuectionTxt.replace("name ", iconName);
         document.getElementById("QuectionContainer").innerHTML = NQuectionTxt1 ;
 		
 		for (var blockNo = 0; blockNo < noOf10Set; blockNo++) {
@@ -83,4 +83,17 @@ function checkAnswerModel1(){
     }
     document.getElementById("answer").innerHTML = greeting;
 
+}
+
+
+
+function nextQuection(){
+	document.getElementById("userInput").value = "";
+	document.getElementById("answer").innerHTML = "";
+	document.getElementById("nextQuectionButton").style.display = "none";
+	var div = document.getElementById('Block');
+	while(div.firstChild){
+		div.removeChild(div.firstChild);
+	}
+	randomNumberGet();
 }

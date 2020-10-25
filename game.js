@@ -49,6 +49,23 @@ class Game{
         grid.material.transparent = true;
         this.scene.add( grid );
 
+        var plane = new THREE.Mesh(
+            new THREE.PlaneBufferGeometry( 119, 400 ),
+            new THREE.MeshPhongMaterial( { color: 0xffffff, specular: 0x101010 } )
+        );
+        plane.rotation.x = - Math.PI / 2;
+        plane.position.y = - 0.5;
+        this.scene.add( plane );
+
+        var plane = new THREE.Mesh(
+            new THREE.PlaneBufferGeometry( 304, 200 ),
+            new THREE.MeshPhongMaterial( { color: 0xffffff, specular: 0x101010 } )
+        );
+        plane.rotation.x = - Math.PI / 2;
+        plane.position.y = - 0.5;
+        this.scene.add( plane );    
+
+
         // model
         const self = this;
         const loader = new THREE.FBXLoader();
@@ -87,6 +104,9 @@ class Game{
             self.loadNextAnim(loader);
            
         } );
+        
+
+
 
         this.renderer = new THREE.WebGLRenderer( { antialias: true } );
     

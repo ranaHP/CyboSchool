@@ -1,71 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>Playing with Animation</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<style>
-			body{
-				overflow: hidden;
-				margin: 0;
-			}
-		</style>
-	</head>
+<html >
+<head>
 
-	<body onload="myfunc();">
-		<div style="width: 100vw;height: 100vh;" >
-			<div style="width: 100vw;height: 100vh;background-color: transparent;position: absolute;top: 0;left: 0;z-index: 100;" >
-				<div>
-					<button onclick="myfunc()">
-						to my function
-					</button>
-					<button onclick="game.stopAnimation.call(game);">Stop All Animations</button>
-					<button onclick="game.playAnimation.call(game, 0);">Play animation 1</button>
-					<button onclick="game.playAnimation.call(game, 1);">Play animation 2</button>
-					<button onclick="game.blendAnimations.call(game, 0.5);">Blend animations</button>
-					<input type="range" min="0" max="1" step="0.05"  onchange="game.blendAnimations.call(game, this.value)" />
-				</div>
-				<div style="width: 70vw;height: 98vh;background-color: red;">
-				
-				</div>
-				
+    <style>
+       
+        html,
+        body {
+        height: 100%;
+        }
 
-			</div>
-			
-			<div  id="3dcView"  style="width: 550px;height: 400pxs;;position: absolute;bottom: -50px;right: -50px;">
-				
-			</div>
-		</div>
-		
+        body {
+        background: -webkit-radial-gradient(black, black);
+        background: radial-gradient(black, black);
+        font-family: 'Source Code Pro', monospace;
+        font-weight: 400;
+        overflow: hidden;
+        padding: 30px 0 0 30px;
+        text-align: center;
+        }
 
-		
-        
-		<script src="libs/three.min.js"></script>
+        .word {
+        bottom: 0;
+        color: #fff;
+        font-size: 5.5em;
+        height: 2.5em;
+        left: 0;
+        line-height: 2.5em;
+        margin: auto;
+        right: 0;
+        position: absolute;
+        text-shadow: 0 0 10px rgba(50, 255, 50, 0.5), 0 0 5px rgba(100, 255, 100, 0.5);
+        top: 0
+        }
 
-		<script src="libs/inflate.min.js"></script>
-		<script src="libs/FBXLoader.js"></script>
+        .word span {
+        display: inline-block;
+        -webkit-transform: translateX(100%) scale(0.9);
+                transform: translateX(100%) scale(0.9);
+        -webkit-transition: -webkit-transform 500ms;
+        transition: -webkit-transform 500ms;
+        transition: transform 500ms;
+        transition: transform 500ms, -webkit-transform 500ms;
+        }
 
-		<script src="libs/OrbitControls.js"></script>
+        .word .done {
+        color: #6f6;
+        -webkit-transform: translateX(0) scale(1);
+                transform: translateX(0) scale(1);
+        }
 
-		<script src="game.js"></script>
-        
-        <script>
-            var game;
+        .overlay {
+        background-image: -webkit-linear-gradient(transparent 0%, rgba(10, 16, 10, 0.5) 50%);
+        background-image: linear-gradient(transparent 0%, rgba(10, 16, 10, 0.5) 50%);
+        background-size: 1000px 2px;
+        bottom: 0;
+        content: '';
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        }
+    </style>
+  
+</head>
+
+<body>
+  <div class="word" id="loadingContent">CyboSchool &nbsp;&nbsp; <span >loading....</span></div>
+  
+<div class="overlay" id="loadingContent2"></div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.6.1/jquery.lettering.min.js'></script>
+
+    <script src="js/index.js"></script>
+    <script>
+        function Ticker( elem ) {
+            elem.lettering();
+            this.done = false;
+            this.cycleCount = 5;
+            this.cycleCurrent = 0;
+            this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-_=+{}|[]\\;\':"<>?,./`~'.split('');
+            this.charsCount = this.chars.length;
+            this.letters = elem.find( 'span' );
+            this.letterCount = this.letters.length;
+            this.letterCurrent = 0;
+
+            this.letters.each( function() {
+                var $this = $( this );
+                $this.attr( 'data-orig', $this.text() );
+                $this.text( '-' );
+            });
+        }
+
+        Ticker.prototype.getChar = function() {
+            return this.chars[ Math.floor( Math.random() * this.charsCount ) ];
+        };
+
+        Ticker.prototype.reset = function() {
+            this.done = false;
+            this.cycleCurrent = 0;
+            this.letterCurrent = 0;
+            this.letters.each( function() {
+                var $this = $( this );
+                $this.text( $this.attr( 'data-orig' ) );
+                $this.removeClass( 'done' );
+            });
+            this.loop();
+        };
+
+        Ticker.prototype.loop = function() {
+            var self = this;
+
+            this.letters.each( function( index, elem ) {
+                var $elem = $( elem );
+                if( index >= self.letterCurrent ) {
+                    if( $elem.text() !== ' ' ) {
+                        $elem.text( self.getChar() );
+                        $elem.css( 'opacity', Math.random() );
+                    }
+                }
+            });
+
+            if( this.cycleCurrent < this.cycleCount ) {
+                this.cycleCurrent++;
+            } else if( this.letterCurrent < this.letterCount ) {
+                var currLetter = this.letters.eq( this.letterCurrent );
+                this.cycleCurrent = 0;
+                currLetter.text( currLetter.attr( 'data-orig' ) ).css( 'opacity', 1 ).addClass( 'done' );
+                this.letterCurrent++;
+            } else {
+                this.done = true;
+            }
+
+            if( !this.done ) {
+                requestAnimationFrame( function() {
+                    self.loop();
+                });
+            } else {
+                setTimeout( function() {
+                    self.reset();
+                }, 750 );
+                setInterval(function (){
+                    location.replace("module.html")
+                } , 3000);
+            }
             
-            document.addEventListener("DOMContentLoaded", function(){
-                game = new Game(); 
-                window.game = game;
-			});
-		
+        };
 
-			function myfunc(){
-				
-				game.playAnimation.call(game, 0);
-				
-				
-				
-			}
-        </script>
+        $words = $( '.word' );
 
-	</body>
+        $words.each( function() {
+            var $this = $( this ),
+                ticker = new Ticker( $this ).reset();
+            $this.data( 'ticker', ticker  );
+            // location.replace("https://www.w3schools.com")
+        });
+    </script>
+</body>
 </html>
