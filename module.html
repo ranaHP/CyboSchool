@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CyboShool</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap links -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- for icon to module -->
+  <script src="https://kit.fontawesome.com/ce4743e969.js" crossorigin="anonymous"></script>   
+
+  <!-- for module javascript code  -->
+  <script src="./questions/myscript.js"></script> 
+  <!-- for module css -->
+  <link rel="stylesheet" href="./questions/module1.css">
+  <!-- for facejs  -->
+  <script defer src="./libs/face-api.min.js"></script>
+  <!-- face recognitioin script -->
+ <script defer src="./facerecognition/script.js"></script>
+  <!-- styls -->
+
+
+  <!-- insert my css -->
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    body{
+      
+      overflow: hidden;
+    }
+    
+    canvas {
+      position: absolute;
+    }
+  
+  </style>
+</head>
+
+
+<body onload="initialitation()"   >
+
+
+  <div  style="background-color: #7efff5;width: 200px;height: 100px;position: absolute;top: 30px;right: 0px;"> 
+   <div >
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <video id="video" width="100" height="100" autoplay muted style="position: absolute;border-radius: 50%;z-index: 50;"></video>
+        <div class="" id="dataShow" ></div>
+      </div>
+   </div>
+
+  </div>
+<!-- start continer -->
+  <div class="container-fluid" style="height: 90vh;width: 100vw;position: absolute;z-index: 10;">
+    <!-- start head row -->
+    <div class="row" style="height: 10vh;width: 100vw;">
+      <div>
+        <h6 class="neon-textHeader" >CYBOSHOOL</h6>
+      </div>
+      <div style="float: right;">
+  
+      </div>
+    </div>
+    <!-- close head row -->
+    <!-- start body row -->
+    <div class="row" >
+
+      <!-- question container view -->
+      <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8" style="height: 90vh;">
+       
+        <!-- question html start -->
+        <div style="width:40vw;" onmouseleave="mouseGoOut();" onmouseenter="mouseGoOut();" >
+          <div style="border: 2px solid #7efff5;padding-left: 100px;margin-right: -200px;margin-top: 100px;padding-bottom: 80px;" class="neon-wrapper">
+            <div class="row " style="margin-top: 50px;">
+              <div class="row">
+                <div class="col-sm-12 col-md-11 col-lg-11 col-xl-11 " >
+                <h4 id="QuectionContainer" ></h4>
+                </div>
+              </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-11 col-lg-11 col-xl-11 ">
+                <hr style="border-top: 1px solid #7efff5; margin-top: -2px;">
+                    <p><div  id="Block" style="width: 700px;"></div></p>
+      
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-11 col-lg-11 col-xl-11 " style="margin-top: 50px;">
+                  <div class="form-group">
+                    <label for="usr">Answer :</label>
+                    <input type="text" class="form-control" id="userInput">
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-primary" value ="submit" id="submit" onclick="checkAnswerModel1();test();">Submite Answer</button>
+                  </div>
+                  
+                </div>
+      
+            </div> 
+            <div class="row" style="width: 500px;">
+              <div class="col-sm-12 col-md-11 col-lg-11 col-xl-11">
+                <div class="form-group">
+                  <label for="usr" id="answer" ></label>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary" value ="submit" id="nextQuectionButton" onclick="nextQuection()" style="display: none;">Next Answer</button>
+                </div>             
+              </div>
+            </div>  
+                 
+            </div>
+          </div>
+        </div>
+
+        <!-- question html end-->
+      </div>
+      
+      <!-- question container view end -->
+      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4" style="height: 90vh;">
+        <div class="row" style="height: 55vh;">
+          <div style="background-color: red;">
+           
+            <!--<button class="btn btn-danger btn-block" onclick="test()">
+              to my function
+            </button>
+             <button class="btn btn-danger btn-block" onclick="game.stopAnimation.call(game);">Stop All Animations</button>
+            <button class="btn btn-danger btn-block" onclick="game.playAnimation.call(game, 0);">Play animation 1</button>
+            <button class="btn btn-danger btn-block" onclick="game.playAnimation.call(game, 1);">Play animation 2</button>
+            <button class="btn btn-danger btn-block" onclick="game.blendAnimations.call(game, 0.5);">Blend animations</button>
+            <input type="range" min="0" max="1" step="0.05"  onchange="game.blendAnimations.call(game, this.value)" /> -->
+          </div>
+        </div>
+        <div class="row" style="height: 45vh;">
+          <!-- my character start -->
+         
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <div  id="3dcView" style="position: absolute;" >
+				
+  </div>
+    <script src="libs/three.min.js"></script>
+
+		<script src="libs/inflate.min.js"></script>
+		<script src="libs/FBXLoader.js"></script>
+
+		<script src="libs/OrbitControls.js"></script>
+
+		<script src="game.js"></script>
+        
+        <script>
+            var game;
+            var mouseStatus = false;
+            var faceExpresion;
+            var faceStatus = true;
+            var acount = 0;
+          function initialitation(){
+            randomNumberGet();
+            game = new Game(); 
+            game.onLoad();
+            window.game = game;
+            
+          }
+          // function   mouseGoOut(){          
+          //   if(mouseStatus && faceStatus){
+            
+          //     game.playAnimation.call(game, 0);
+             
+            
+          //   }else{
+              
+           
+          //     game.playAnimation.call(game, 1);
+          //   }
+          //   mouseStatus = !mouseStatus;
+            
+            
+          //  }
+          //  setInterval(function(){ 
+          //   faceExpresion = getExpresion();
+            
+          //   console.log("facial Exprerssion is -" + faceExpresion); 
+          //   if(faceExpresion == "happy"){
+          //     game.playAnimation.call(game, 3);
+          //     alert("you are very happy kid , i like u");
+          //   }else if(faceExpresion == "angry"){
+          //     if(acount < 3){
+          //       acount++;
+          //     }else{
+          //       acount = 0;
+          //       game.playAnimation.call(game, 4);
+          //       alert("Dont angry kid");
+          //     }
+              
+          //   }
+          // }, 2000);
+          
+        </script>
+</body>
+</html>
+
+<!-- else if(faceExpresion == "happy"){
+  game.playAnimation.call(game, 4);
+}else if(faceExpresion == "surprised"){
+  game.playAnimation.call(game, 5);
+} -->

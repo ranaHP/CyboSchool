@@ -1,0 +1,23 @@
+.blockStyle{
+    float: left;
+    padding: 2px;
+    margin: 1.5px;
+    border: 1.5px solid #E6FB04;
+  
+  }
+  
+  
+  .mainBlock{
+    height: 50px;
+    width: 500px;
+    float: left;
+    margin: 10px;
+    padding: 0px;
+    text-align: center;
+  
+    
+  } 
+
+  h4{
+    color: aliceblue;
+  }

@@ -1,0 +1,64 @@
+.wrapper{
+    position: reltive;
+    z-index: 999;             
+    border:1px solid red;
+    box-sizing: border-box;
+    border: 3px solid #0cd808;
+    box-shadow: 0 0 1px #b3ff51, 0 0 2px #b3ff51, 0 0 6px #b3ff51, 0 0 12px #b3ff51, inset 0 0 1px #b3ff51, inset 0 0 2px #b3ff51, inset 0 0 6px #b3ff51, inset 0 0 12px #b3ff51;
+    
+    }
+
+    @font-face {
+        font-family: neon;
+        src: url(hellodenverdisplayregular_v1.6.ttf);
+      }
+      .neon-wrapper {
+        box-shadow:
+        0 0 0.1vw  0.4vw #fff7f7,   
+        0 0 0.4vw  0.6vw #e97272, 
+        0 0   2vw  0.4vw #e50b0b,
+        inset 0 0 1.5vw  0.4vw #e50b0b,
+        inset 0 0 0.4vw  0.2vw #e97272;
+        
+        border-radius: 1.5rem;
+        z-index: 60;
+      }
+      .neon-wrapper_name {
+        box-shadow:
+        0 0 0.1vw  0.4vw #fff7f7,   
+        0 0 0.4vw  0.6vw #e97272, 
+        0 0   2vw  0.4vw #e50b0b,
+        inset 0 0 1.5vw  0.4vw #e50b0b,
+        inset 0 0 0.4vw  0.2vw #e97272;
+        
+        border-radius: 0.5rem;
+        z-index: 60;
+        width: 200px;height: 100px;position: absolute;
+      }
+      .neon-text {
+        font-family:neon;
+        font-size: 14rem;
+        color: #ffd8d8;
+        padding: 0 3.5rem 0 3.5rem;
+        text-shadow: 
+        .1vw 0vw .25vw #ffd8d8, .2vw 0vw .25vw #ffd8d8, .4vw 0vw .25vw #ffd8d8, 
+        .1vw 0vw   0vw #f25757, .2vw 0vw   0vw #f25757, .4vw 0vw   0vw #f25757,
+        .1vw 0vw  .1vw #f25757, .2vw 0vw  .1vw #f25757, .4vw 0vw  .1vw #f25757,
+        .1vw 0vw   2vw #f25757, .2vw 0vw   2vw #f25757, .4vw 0vw   2vw #f25757, 
+        .1vw 0vw   1vw #e50b0b, .2vw 0vw   1vw #e50b0b, .4vw 0vw   5vw #e50b0b, 
+        .1vw 0vw   5vw #e50b0b, .2vw 0vw  20vw #e50b0b, .4vw 0vw  10vw #e50b0b,
+        .1vw 0vw  10vw #e50b0b, .2vw 0vw  30vw #e50b0b, .4vw 0vw  10vw #e50b0b;
+      }
+      .neon-textHeader {
+        
+        font-size: 5rem;
+        color: #fff7f7;
+        padding: 2rem 3.5rem 0 3.5rem;
+        text-shadow: 
+        .1vw 0vw .25vw #1e7336, .2vw 0vw .25vw #1e7336, .4vw 0vw .25vw #1e7336, 
+        .1vw 0vw   0vw #57f25c, .2vw 0vw   0vw #57f25c, .4vw 0vw   0vw #57f25c,
+        .1vw 0vw  .1vw #92f257, .2vw 0vw  .1vw #57f25c, .4vw 0vw  .1vw #57f25c,
+        .1vw 0vw   2vw #71f257, .2vw 0vw   2vw #57f25c, .4vw 0vw   2vw #57f25c, 
+        .1vw 0vw   1vw #28e50b, .2vw 0vw   1vw #0be512, .4vw 0vw   5vw #0be512, 
+       
+      }
