@@ -1,6 +1,6 @@
 var voiceDivInFirst =["Hello Kid, Let's get Start Our Class.",];
 var voiceDivInNoFirst =["Very Good let's do this"];
-var voiceDivOut =["Please, Don't do other works. Comeon let's do this.","Please, put your pointer on your Cybro School Board."];
+var voiceDivOut =["Please, Don't do other works. Come on let's do this.","Please, put your pointer on your Cybro School Board."];
 var voiceNoFace =["Hello, Are your there." ,"I can't see you.","Where are you . I can't see you"];
 var voiceDivInHappy =["You are Seemied to be Happy.","you are happy child","your smile is Beautiful"];
 var voiceDivOutHappyt =["You are happy child, Let's We Start to Study","your smile is Beautiful, Let's do this"];

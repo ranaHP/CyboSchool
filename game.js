@@ -7,7 +7,7 @@ class Game{
         // this.animations = ["Walking" ,"Twilight_Idle","Twilight_JumpEnd","Twilight_JumpLoop","Twilight_JumpStart","Twilight_Run"]; 
         //this.animations = ["start","clap1","clap2","dance1","dance2","dance3","dance4","dance5","drum1","ex1","no1","idel1","idel2","idel3","idel4","vic1","vic2","where1" ];
 
-        this.animations = ["dance1","dance2","dance3","dance4","dance5","where1","idel1","idel2","idel3","idel4","vic1","vic2","idel3","no1" ];
+        this.animations = ["clap1","dance1","dance2","dance3","dance4","dance5","where1","idel1","idel2","idel3","idel4","vic1","vic2","idel3","no1" ];
         
 		this.init(textureName);
     }
