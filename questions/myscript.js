@@ -73,15 +73,20 @@ var mainDivHeight = 55;
 	
 
 function checkAnswerModel1(){
+	var IsCorrecct = false;
 	var uAnswer = document.getElementById("userInput").value;
     if ( uAnswer == randomNumber) {
-        greeting = "Correct Answer";
+		greeting = "Correct Answer";
+		IsCorrecct = true;
         document.getElementById("nextQuectionButton").style.display = "block";
     } else {
         document.getElementById("nextQuectionButton").style.display = "none";
-         greeting = "Worng Answer";
+		 greeting = "Worng Answer";
+		 IsCorrecct = false;
     }
-    document.getElementById("answer").innerHTML = greeting;
+	document.getElementById("answer").innerHTML = greeting;
+	
+	return IsCorrecct;
 
 }
 
@@ -95,5 +100,9 @@ function nextQuection(){
 	while(div.firstChild){
 		div.removeChild(div.firstChild);
 	}
-	randomNumberGet();
+// 	document.getElementById("QuectionContainer").innerHTML = "Loading ..." ;
+//   setTimeout(function(){ randomNumberGet(); }, 1000);
+
+randomNumberGet();
+	
 }

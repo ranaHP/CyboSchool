@@ -1,6 +1,7 @@
 const video = document.getElementById('video')
 var FaceExpresionName =["angry" , "disgusted" , "fearfulc" , "happy" , "sad" , "neutral" ,"surprised"];
 var FaceExpresion =[];
+var IsFaceDetec = false;
 Promise.all([
   faceapi.nets.tinyFaceDetector.loadFromUri('/facerecognition/models'),
   faceapi.nets.faceLandmark68Net.loadFromUri('/facerecognition/models'),
@@ -30,7 +31,8 @@ video.addEventListener('play', () => {
     faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
     faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
     if(detections[0] != null){
-     //console.log(interpolatedExpressionsPredictions(detections[0]["expressions"]));
+     
+      //console.log(detections[0]);
       // console.log(" angry - " + detections[0]["expressions"]["angry"].toFixed(2) );
       // console.log(" happy - " + detections[0]["expressions"]["happy"].toFixed(2));
       // console.log(" sad - " + detections[0]["expressions"]["sad"].toFixed(2));
@@ -45,13 +47,17 @@ video.addEventListener('play', () => {
     
       
         //console.log(a,h,s,n,su);
-      sortExpresion(a,h,s,n,su);
+       sortExpresion(a,h,s,n,su);
 
 
-        // console.log(detections[0]);
-       }
-    
-  }, 100)
+        // console.log("Face Detec");
+        IsFaceDetec = true;
+  }else{
+    // console.log("No FAce");
+    IsFaceDetec = false;
+  }
+  // getExpresion();  
+  }, 500)
 })
 
 
@@ -80,7 +86,7 @@ function sortExpresion(angry , happy , sad , neutral ,surprised){
   }
 
   
-  //console.log("Face Expression is -" + FaceExpresionName[0] + " -- " + FaceExpresion[0] );
+ //console.log("Face Expression is -" + FaceExpresionName[0] + " -- " + FaceExpresion[0] );
   // console.log("Face Expression is -" + FaceExpresionName[1] + " -- " + FaceExpresion[1] );
   // console.log("Face Expression is -" + FaceExpresionName[2] + " -- " + FaceExpresion[2] );
   // console.log("Face Expression is -" + FaceExpresionName[3] + " -- " + FaceExpresion[3] );
@@ -88,5 +94,15 @@ function sortExpresion(angry , happy , sad , neutral ,surprised){
 
 }
 function getExpresion(){
-  return FaceExpresionName[0];
+  if(IsFaceDetec){
+    console.log(FaceExpresionName[0]);
+    return FaceExpresionName[0];
+  }else{
+    console.log("No Face Delect");
+    return null;
+  }
 }
+
+// function getExpresion(){
+//   return "angry";
+// }

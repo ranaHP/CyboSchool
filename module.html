@@ -19,9 +19,9 @@
   <!-- for module css -->
   <link rel="stylesheet" href="./questions/module1.css">
   <!-- for facejs  -->
-  <!-- <script defer src="./libs/face-api.min.js"></script> -->
+  <script defer src="./libs/face-api.min.js"></script>
   <!-- face recognitioin script -->
- <!-- <script defer src="./facerecognition/script.js"></script> -->
+ <script defer src="./facerecognition/script.js"></script>
   <!-- insert my css -->
   <link rel="stylesheet" href="./style.css">
 
@@ -30,14 +30,45 @@
   <script src="https://code.responsivevoice.org/responsivevoice.js?key=DV3DznWY"></script>
   
   <script src="./voice.js"></script>
-
+  <style>
+    .modal-backdrop {
+      z-index: -10;
+    }
+  </style>
 
 </head>
 
 
-<body onload="initialitation()">
+<body onload="initialitation();">
+  <!--  model start -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="color: black;">
+    <div class=" modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
 
-
+        </div>
+        <div class="modal-body" id="modelBody">
+          ...
+        </div>
+        <div class="modal-footer">
+           
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal"></button> -->
+          <button type="button" class="btn btn-primary" id="nextQuecBtn" style="display: none;">Go To Next Quection</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" 
+  id="modelDisplayBtn1" style="display: none;">Click</button>
+  
+  <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" 
+  id="modelDisplayBtn2" style="display: none;">Click</button>
+  
+<!-- model end -->
   <div  style="background-color: #7efff5;width: 200px;height: 100px;position: absolute;top: 30px;right: 0px;"> 
    <div >
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
@@ -45,7 +76,7 @@
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
         <video id="video" width="100" height="100" autoplay muted style="position: absolute;border-radius: 50%;z-index: 50;"></video>
-        <div class="" id="dataShow" ></div>
+        <div class="" id="dataShow" style="width: 100px;height: 100px;z-index: 60;position: absolute;"></div>
       </div>
    </div>
 
@@ -69,7 +100,7 @@
       <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8" style="height: 90vh;">
        
         <!-- question html start -->
-        <div style="width:40vw;" onmouseleave="mouseGoOut();" onmouseenter="mouseGoOut();" >
+        <div style="width:40vw;" onmouseleave="mouseGoOut();" onmouseenter="mouseGoIn();" >
           <div style="border: 2px solid #7efff5;padding-left: 100px;margin-right: -200px;margin-top: 100px;padding-bottom: 80px;  background: rgba(0,0,0,0.5);" class="neon-wrapper">
             <div class="row " style="margin-top: 50px;">
               <div class="row">
@@ -91,7 +122,7 @@
                     <input type="text" class="form-control" id="userInput">
                   </div>
                   <div class="form-group">
-                    <button class="btn btn-outline-danger" value ="submit" id="submit" onclick="checkAnswerModel1();">Submite Answer</button>
+                    <button class="btn btn-outline-danger" value ="submit" id="submit" onclick="checkAnsw();">Submite Answer</button>
                   </div>
                   
                 </div>
@@ -104,7 +135,10 @@
                   <label for="usr" id="answer" ></label>
                 </div>
                 <div class="form-group">
-                  <button class="btn btn-outline-primary" value ="submit" id="nextQuectionButton" onclick="nextQuection()" style="display: none;">Next Answer</button>
+                  <button class="btn btn-outline-primary" value ="submit" id="nextQuectionButton" onclick="nextQuection();" style="display: none;">Next Answer</button>
+
+                  <button class="btn btn-outline-primary" value ="submit" onclick="myTyping();" style="display: none;" >Next Answer</button>
+
                 </div>             
               </div>
             </div>  
@@ -118,94 +152,179 @@
       
       <!-- question container view end -->
       <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4" style="height: 90vh;">
-        <div class="row" style="height: 55vh;">
-          <div style="background-color: red;">
-           
-            <!--<button class="btn btn-danger btn-block" onclick="test()">
-              to my function
-            </button>
-             <button class="btn btn-danger btn-block" onclick="game.stopAnimation.call(game);">Stop All Animations</button>
-            <button class="btn btn-danger btn-block" onclick="game.playAnimation.call(game, 0);">Play animation 1</button>
-            <button class="btn btn-danger btn-block" onclick="game.playAnimation.call(game, 1);">Play animation 2</button>
-            <button class="btn btn-danger btn-block" onclick="game.blendAnimations.call(game, 0.5);">Blend animations</button>
-            <input type="range" min="0" max="1" step="0.05"  onchange="game.blendAnimations.call(game, this.value)" /> -->
-          </div>
-        </div>
-        <div class="row" style="height: 45vh;">
-          <!-- my character start -->
+        <div class="row" style="height: 5vh;">
          
         </div>
+        <div class="row" style="height: 25vh;">
+          <div >
+            <h1 id="tts_text"></h1>
+          </div>
+          
+          <div style="width: 500px;height: 80px;">
+           <div id="text" style="display: none;"></div>
+          </div>
+        </div>
+        
       </div>
     </div>
     
   </div>
-  <div  id="3dcView" style="position: absolute;" >
-				
+  <div  id="3dcView" style="position: absolute;" >	
   </div>
-    <script src="libs/three.min.js"></script>
 
+    <script src="libs/three.min.js"></script>
 		<script src="libs/inflate.min.js"></script>
 		<script src="libs/FBXLoader.js"></script>
-
 		<script src="libs/OrbitControls.js"></script>
-
 		<script src="game.js"></script>
         
         <script>
+           var string = "Cyber School"; 
+            var array = string.split("");
+            var timer;
+            document.getElementById("tts_text").innerText  ="";
+            function frameLooper () {
+
+              if (array.length > 0) {
+                document.getElementById("tts_text").innerHTML += array.shift();
+              } else {
+                clearTimeout(timer);
+                  }
+              loopTimer = setTimeout('frameLooper()',70); /* change 70 for speed */
+
+            }
             var game;
-            var mouseStatus = false;
             var faceExpresion;
-            var faceStatus = true;
             var acount = 0;
+            var noFaceCount = 0;
+            var HappyFaceCount = 0;
+            var angryFaceCount = 0;
+            var IsInDiv  =true;
+            var IsFirst  =true;
+            var temp = false;
           function initialitation(){
             randomNumberGet();
             game = new Game(); 
             game.onLoad();
             window.game = game;  
-            tts("Hwllo ");
+            //sayTextGet(document.getElementById("QuectionContainer").innerText);
+           
+           
           }
           
+          function mouseGoIn(){ 
+           if(IsFirst){
+            game.playAnimation.call(game, 1);
+            string = sayTextGet('voiceDivInFirst');
+            array = string.split("");
+            frameLooper();
+            //document.getElementById('modelDisplayBtn2').click();
+            IsFirst = false;
+            noFaceCount = 0;
+            cameraStart();
 
-          function   mouseGoOut(){          
-            if(mouseStatus && faceStatus){
-              //tts("Hey Kid What are you doing? you have to do this.. ")
-              game.playAnimation.call(game, 0);
-             
-            
-            }else{
-              //tts("You are Good Boy.Let's to this ");
-           
-              game.playAnimation.call(game, 1);
-            }
-            mouseStatus = !mouseStatus;
-            
-            
+           }else{
+            game.playAnimation.call(game, 2);
+
+            string = sayTextGet('voiceDivInNoFirst');
+            array = string.split("");
+            document.getElementById("tts_text").innerText = "Teacher : ";
+            frameLooper();
+            noFaceCount = 0;
            }
-          //  setInterval(function(){ 
-          //   faceExpresion = getExpresion();
-            
-          //   console.log("facial Exprerssion is -" + faceExpresion); 
-          //   if(faceExpresion == "happy"){
-          //     game.playAnimation.call(game, 3);
-          //     alert("you are very happy kid , i like u");
-          //   }else if(faceExpresion == "angry"){
-          //     if(acount < 3){
-          //       acount++;
-          //     }else{
-          //       acount = 0;
-          //       game.playAnimation.call(game, 4);
-          //       alert("Dont angry kid");
-          //     }
+           IsInDiv = true;
+          }
+
+          function mouseGoOut(){ 
+              game.playAnimation.call(game, 0);
+              string = sayTextGet('voiceDivOut');
+              document.getElementById("tts_text").innerText = "Teacher : ";
+              array = string.split("");
+              frameLooper();
               
-          //   }
-          // }, 2000);
+              IsInDiv = false;
+              noFaceCount = 0;
+          }
+
+          function checkAnsw(){
+            if(checkAnswerModel1()){
+               string = sayTextGet('voiceCorrectAnsw');
+              document.getElementById("tts_text").innerText = "Teacher : ";
+               array = string.split("");
+              frameLooper();
+              
+              game.playAnimation.call(game, 3);
+            }else{
+               string = sayTextGet('voiceWrongAnsw');
+              document.getElementById("tts_text").innerText = "Teacher : ";
+               array = string.split("");
+              frameLooper();
+              
+              game.playAnimation.call(game, 5);
+            }
+          }
+         
+          function cameraStart(){
+            setInterval(function(){ 
+              faceExpresion = getExpresion();
+              
+              console.log("facial Exprerssion is -" + faceExpresion); 
+              if(faceExpresion == null){
+                noFaceCount ++;
+                if(noFaceCount == 50){
+                  noFaceCount = 0;
+                  game.playAnimation.call(game, 8);  
+                  string = sayTextGet('voiceNoFace');
+                  document.getElementById("tts_text").innerText = "Teacher : ";
+                  array = string.split("");
+                  frameLooper();
+                  document.getElementById('modelDisplayBtn2').click();
+                }
+              }else if(faceExpresion == "happy"){
+
+                HappyFaceCount++;
+                if(HappyFaceCount == 5){
+                  HappyFaceCount = 0;
+                  if(IsInDiv){
+                    game.playAnimation.call(game, 3);
+                     string = sayTextGet('voiceDivInHappy');
+                    document.getElementById("tts_text").innerText = "Teacher : ";
+                     array = string.split("");
+                    frameLooper();
+                    
+                  }else{
+                    game.playAnimation.call(game, 3);
+                    string = sayTextGet('voiceDivOutHappyt');
+                    document.getElementById("tts_text").innerText = "Teacher : ";
+                    array = string.split("");
+                    frameLooper();
+                    
+                  }
+                }
+                
+              }else if(faceExpresion == "angry"){
+
+                angryFaceCount++;
+                if(angryFaceCount == 10){
+                  angryFaceCount = 0;
+                  game.playAnimation.call(game, 9);
+                  string = sayTextGet('voiceangry');
+                  document.getElementById("tts_text").innerText = "Teacher : ";
+                  array = string.split("");
+                  frameLooper();
+                  setTimeout(function(){ game.playAnimation.call(game, 10); }, 1000);
+                  setTimeout(function(){ game.playAnimation.call(game, 10); }, 1000);
+
+                }
+                
+              }
+            }, 1000);
+          }
+          function myTyping(){
+            document.getElementById("tts_text").innerText = "tts_text";
+          }
           
         </script>
 </body>
 </html>
 
-<!-- else if(faceExpresion == "happy"){
-  game.playAnimation.call(game, 4);
-}else if(faceExpresion == "surprised"){
-  game.playAnimation.call(game, 5);
-} -->
